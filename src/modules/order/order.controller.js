@@ -95,6 +95,9 @@ export const createOrder = async (req,res,next) => {
             cancel_url: 'https://www.google.com',//update when have html pages(frontend)
             payment_method_types: ['card'],
             mode: 'payment',
+            metadata: { //put any data you wwant
+                orderId: orderCreated._id
+            }
             line_items: orderCreated.products.map( (product) => {
                 return {
                     price_data: {
