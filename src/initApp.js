@@ -1,3 +1,4 @@
+import Stripe from "stripe";
 import { connectDB } from "../db/connection.js"
 import { asyncHandler, globalErrorHandling } from "./utils/asyncHandler.js"
 import * as allRouters from './index.js';
@@ -15,6 +16,7 @@ export const initApp = (app, express) => {
         if (endpointSecret) {
           // Get the signature sent by Stripe
           const signature = req.headers['stripe-signature'].toString();
+          const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
             event = stripe.webhooks.constructEvent(
               req.body,
               signature,
