@@ -121,3 +121,14 @@ export const updateProfileData = async (req,res,next) => {
         data: updatedUser
     });  
 }
+
+//delete user
+export const deleteUser = async (req,res,next) => {
+    //get data from req
+    const userId = req.authUser._id;
+    const user = await User.findByIdAndUpdate(userId, { isDeleted: true });
+    if(!user){
+        return next(new AppError(messages.user.notFound, 404))
+    }
+    return res.status(200).json({ message: messages.user.deletedSuccessfully, success: true })
+}

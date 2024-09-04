@@ -91,8 +91,9 @@ export const login = async (req,res,next) => {
         return next(new AppError(messages.password.invalidCredintial, 401)) //unouthorized
     }
 
-    //change isActive to true
+    //change isActive to true and update isDeleted
     userExist.isActive = true;
+    userExist.isDeleted  = false;
     await userExist.save();
 
     //generate token

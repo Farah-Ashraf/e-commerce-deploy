@@ -63,6 +63,10 @@ const userSchema = new Schema({
             ref: 'Product' 
         }
     ],
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
     otp: Number,
     expireDateOtp: Date
 
