@@ -20,6 +20,9 @@ export const initApp = (app, express) => {
     app.use('/cart', allRouters.cartRouter)
     app.use('/user', allRouters.userRouter)
     app.use('/order', allRouters.orderRouter)
+    app.use('*', (req,res,next) => {
+        return res.json({ message: "invalid url" })
+    })
 
 
     app.use(globalErrorHandling)
