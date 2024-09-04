@@ -20,7 +20,7 @@ export const initApp = (app, express) => {
             event = stripe.webhooks.constructEvent(
               req.body,
               signature,
-              'whsec_i9iPQdw9ZcVMBHzFwwQooY99hLBanT7D'
+              'whsec_CHm50gJSDefBrJFKf6k7rLSQpDNBFK4X'
             );
         }
       
