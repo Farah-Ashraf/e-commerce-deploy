@@ -30,14 +30,11 @@ export const initApp = (app, express) => {
 
             //once the event occur => clear cart of that user, update order status, update product stock
             const orderId = checkout.metadata.orderId;
-            const orderExist = await Order.findByIdAndUpdate(orderId, { status: orderStatus.PLACED }, { new: true });
+            const orderExist = await Order.findByIdAndUpdate(orderId, { status: orderStatus.SHIPPING }, { new: true });
             await  Cart.findOneAndUpdate({ user: orderExist.user }, { products: [] }, { new: true })
             for (const product of orderExist.products) {
-                await Product.findByIdAndUpdate(product.productId, { $inc: { stock: -product.quantity } })
-                
+                await Product.findByIdAndUpdate(product.productId, { $inc: { stock: -product.quantity } }, { new: true })    
             }
-
-
         }
         
         // Return a 200 res to acknowledge receipt of the event
