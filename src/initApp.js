@@ -16,11 +16,12 @@ export const initApp = (app, express) => {
         if (endpointSecret) {
           // Get the signature sent by Stripe
           const signature = req.headers['stripe-signature'].toString();
+          const endpointSecret = 'whsec_CHm50gJSDefBrJFKf6k7rLSQpDNBFK4X';
           const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
             event = stripe.webhooks.constructEvent(
               req.body,
               signature,
-              'whsec_CHm50gJSDefBrJFKf6k7rLSQpDNBFK4X'
+              endpointSecret
             );
         }
       
